@@ -12,10 +12,15 @@ public class Hex
     public readonly int S;
 
     readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(3) / 2;
-    readonly float radius = 1f; // Radius of the hexagon
+    readonly float radius = 1f;
 
+    // TODO
     bool allowWrapAroundEastWest = true; // Allow wrap-around for east-west edges
     bool allowWrapAroundNorthSouth = false; // OPTIONAL: Allow wrap-around for north-south edges, doesn't really make sense
+
+    // Data for map generation
+    public float Elevation;
+    public float Moisture;
 
     public Hex(int q, int r)
     {
@@ -96,5 +101,15 @@ public class Hex
         }
 
         return position;
+    }
+
+    public static float Distance(Hex a, Hex b)
+    {
+        // TODO: Add wrap-around logic
+        return Mathf.Max(
+            Mathf.Abs(a.Q - b.Q),
+            Mathf.Abs(a.R - b.R),
+            Mathf.Abs(a.S - b.S)
+        );
     }
 }
