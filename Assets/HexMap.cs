@@ -16,11 +16,17 @@ public class HexMap : MonoBehaviour
     public Material MatPlains;
     public Material MatGrassland;
     public Material MatMountain;
+    public Material MatDesert;
 
     // Height above x is y
     public float HeightMountain = 0.85f;
     public float HeightHill = 0.6f;
     public float HeightFlat = 0.0f;
+
+    public float MoistureJungle = 1f;
+    public float MoistureForest = 0.6f;
+    public float MoistureGrasslands = 0.33f;
+    public float MoisturePlains = 0.0f;
 
     public readonly int NumRows = 30;
     public readonly int NumColumns = 60;
@@ -120,26 +126,57 @@ public class HexMap : MonoBehaviour
                 GameObject hexGO = hexGameObjects[hex];
 
                 MeshRenderer meshRenderer = hexGO.GetComponentInChildren<MeshRenderer>();
+                MeshFilter meshFilter = hexGO.GetComponentInChildren<MeshFilter>();
 
+                // Elevation to set mesh
                 if (hex.Elevation >= HeightMountain)
                 {
-                    meshRenderer.material = MatMountain;
+                    meshFilter.mesh = MeshMountain;
                 }
                 else if (hex.Elevation >= HeightHill)
                 {
-                    meshRenderer.material = MatGrassland;   // TODO
+                    meshFilter.mesh = MeshHill;
                 }
                 else if (hex.Elevation >= HeightFlat)
                 {
-                    meshRenderer.material = MatPlains;
+                    meshFilter.mesh = MeshFlat;
+                }
+                else
+                {
+                    meshFilter.mesh = MeshWater;
+                }
+
+
+                // Moisture to set texture
+                if (hex.Elevation >= HeightFlat)
+                {
+                    if (hex.Moisture >= MoistureJungle)
+                    {
+                        meshRenderer.material = MatGrassland;
+                        // TODO: spawn Jungle
+                    }
+                    else if (hex.Moisture >= MoistureForest)
+                    {
+                        meshRenderer.material = MatGrassland;
+                        // TODO: spawn forest
+                    }
+                    else if (hex.Moisture >= MoistureGrasslands)
+                    {
+                        meshRenderer.material = MatGrassland;
+                    }
+                    else if (hex.Moisture >= MoisturePlains)
+                    {
+                        meshRenderer.material = MatPlains;
+                    }
+                    else
+                    {
+                        meshRenderer.material = MatDesert;
+                    }
                 }
                 else
                 {
                     meshRenderer.material = MatOcean;
                 }
-
-                MeshFilter meshFilter = hexGO.GetComponentInChildren<MeshFilter>();
-                meshFilter.mesh = MeshWater;
             }
         }
     }

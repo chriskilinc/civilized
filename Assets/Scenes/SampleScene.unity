@@ -478,6 +478,14 @@ MonoBehaviour:
   MatPlains: {fileID: 2100000, guid: be43bc2b035557847a08ae24c7dbefb6, type: 2}
   MatGrassland: {fileID: 2100000, guid: fea8cacc1e259304caad0284ba7c5820, type: 2}
   MatMountain: {fileID: 2100000, guid: b7eb0eee955510b4eb41da3b9271752e, type: 2}
+  MatDesert: {fileID: 0}
+  HeightMountain: 0.85
+  HeightHill: 0.6
+  HeightFlat: 0
+  MoistureJungle: 1
+  MoistureForest: 0.6
+  MoistureGrasslands: 0
+  MoisturePlains: 0
 --- !u!4 &1310043957
 Transform:
   m_ObjectHideFlags: 0
@@ -508,12 +516,20 @@ MonoBehaviour:
   HexPrefab: {fileID: 8406616074250089105, guid: 74a27e9548710844899b668f219295f9, type: 3}
   MeshWater: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
   MeshFlat: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
-  MeshHill: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
-  MeshMountain: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
+  MeshHill: {fileID: 4300000, guid: 91f4311fd10b4fd4aaeb00b581fd24e8, type: 3}
+  MeshMountain: {fileID: 4300000, guid: 406398c8c03649e45883ffe9e4b93e02, type: 3}
   MatOcean: {fileID: 2100000, guid: 3d85256a53fc380489d9a124fd70a30a, type: 2}
   MatPlains: {fileID: 2100000, guid: be43bc2b035557847a08ae24c7dbefb6, type: 2}
   MatGrassland: {fileID: 2100000, guid: fea8cacc1e259304caad0284ba7c5820, type: 2}
   MatMountain: {fileID: 2100000, guid: b7eb0eee955510b4eb41da3b9271752e, type: 2}
+  MatDesert: {fileID: 2100000, guid: 22f504452eb50ab4bab57cf698700c58, type: 2}
+  HeightMountain: 0.85
+  HeightHill: 0.6
+  HeightFlat: 0
+  MoistureJungle: 1
+  MoistureForest: 0.6
+  MoistureGrasslands: 0
+  MoisturePlains: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

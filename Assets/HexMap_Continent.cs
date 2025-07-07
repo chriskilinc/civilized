@@ -50,8 +50,30 @@ public class HexMap_Continent : HexMap
 			}
 		}
 
-		// Set meshes and materials for different hex types based on height
 		// Simulate rainfall and temperature to determine hex types
+		noiseScale = 1f;  // Larger values create more pronounced islands and lakes
+		noiseResolution = 0.1f;
+		noiseOffset = new(Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+		for (int column = 0; column < NumColumns; column++)
+		{
+			for (int row = 0; row < NumRows; row++)
+			{
+				Hex hex = GetHexAt(column, row);
+				if (hex != null)
+				{
+					float noise = Mathf.PerlinNoise(
+						((float)column / Mathf.Max(NumColumns, NumRows) / noiseResolution) + noiseOffset.x,
+						((float)row / Mathf.Max(NumColumns, NumRows) / noiseResolution) + noiseOffset.y
+						) - 0.5f;
+
+					hex.Moisture = noise * noiseScale;
+				}
+			}
+		}
+
+
+		// Set meshes and materials for different hex types based on height
 		UpdateHexVisuals();
 	}
 
