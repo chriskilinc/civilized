@@ -14,19 +14,17 @@ public class Hex
     readonly float WIDTH_MULTIPLIER = Mathf.Sqrt(3) / 2;
     readonly float radius = 1f;
 
-    // TODO
-    bool allowWrapAroundEastWest = true; // Allow wrap-around for east-west edges
-    bool allowWrapAroundNorthSouth = false; // OPTIONAL: Allow wrap-around for north-south edges, doesn't really make sense
-
     // Data for map generation
     public float Elevation;
     public float Moisture;
+    private readonly HexMap _hexMap;    // Maybe there is a more elegant way to do this (maybe add a settings class or something)
 
-    public Hex(int q, int r)
+    public Hex(int q, int r, HexMap hexMap)
     {
         Q = q;
         R = r;
         S = -Q - R; // Ensures the hex coordinates are valid
+        _hexMap = hexMap;
     }
 
     public float HexHeight()
@@ -66,7 +64,7 @@ public class Hex
         float mapHeight = numRows * HexVerticalSpacing();
         float mapWidth = numColumns * HexHorizontalSpacing();
 
-        if (allowWrapAroundEastWest)
+        if (_hexMap.allowWrapAroundEastWest)
         {
             float wfc = (position.x - cameraPosition.x) / mapWidth;
 
@@ -83,7 +81,7 @@ public class Hex
             position.x -= wtf * mapWidth;
         }
 
-        if (allowWrapAroundNorthSouth)
+        if (_hexMap.allowWrapAroundNorthSouth)
         {
             float hfc = (position.z - cameraPosition.z) / mapHeight;
 
@@ -103,13 +101,26 @@ public class Hex
         return position;
     }
 
+    /// <summary>
+    /// Calculates the distance between two hexes using axial coordinates.
+    /// This method accounts for optional wrap-around logic on the Q axis (east-west) and R axis (north-south),
+    /// </summary>
     public static float Distance(Hex a, Hex b)
     {
-        // TODO: Add wrap-around logic
-        return Mathf.Max(
-            Mathf.Abs(a.Q - b.Q),
-            Mathf.Abs(a.R - b.R),
-            Mathf.Abs(a.S - b.S)
-        );
+        int dq = Mathf.Abs(a.Q - b.Q);
+        int dr = Mathf.Abs(a.R - b.R);
+        int ds = Mathf.Abs(a.S - b.S);
+
+        // Use HexMap settings for wrap-around
+        if (a._hexMap.allowWrapAroundEastWest)
+        {
+            dq = Mathf.Min(dq, a._hexMap.NumColumns - dq);
+        }
+        if (a._hexMap.allowWrapAroundNorthSouth)
+        {
+            dr = Mathf.Min(dr, a._hexMap.NumRows - dr);
+        }
+
+        return Mathf.Max(dq, dr, ds);
     }
 }

@@ -25,9 +25,8 @@ public class HexMap : MonoBehaviour
     public readonly int NumRows = 30;
     public readonly int NumColumns = 60;
 
-    // TODO
-    readonly bool allowWrapAroundEastWest = true; // Allow wrap-around for east-west edges
-    readonly bool allowWrapAroundNorthSouth = false; // OPTIONAL: Allow wrap-around for north-south edges, doesn't really make sense
+    public readonly bool allowWrapAroundEastWest = true; // Allow wrap-around for east-west edges
+    public readonly bool allowWrapAroundNorthSouth = false; // OPTIONAL: Allow wrap-around for north-south edges, doesn't really make sense
 
     private Hex[,] hexes;
     private Dictionary<Hex, GameObject> hexGameObjects;
@@ -89,7 +88,7 @@ public class HexMap : MonoBehaviour
         {
             for (int row = 0; row < NumRows; row++)
             {
-                Hex hex = new(column, row)
+                Hex hex = new(column, row, this)
                 {
                     Elevation = -0.5f // (ocean)
                 };
