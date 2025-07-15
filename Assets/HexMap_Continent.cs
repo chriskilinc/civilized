@@ -29,9 +29,11 @@ public class HexMap_Continent : HexMap
 		}
 
 		// Add lumpiness using Perlin noise
-		float noiseScale = 2f;  // Larger values create more pronounced islands and lakes
-		float noiseResolution = 0.1f;
+		float noiseResolution = 0.01f;
 		Vector2 noiseOffset = new(Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+		float noiseScale = 2f;  // Larger values makes more islands (and lakes, I guess)
+
 
 		for (int column = 0; column < NumColumns; column++)
 		{
@@ -51,9 +53,9 @@ public class HexMap_Continent : HexMap
 		}
 
 		// Simulate rainfall and temperature to determine hex types
-		noiseScale = 1f;  // Larger values create more pronounced islands and lakes
-		noiseResolution = 0.1f;
+		noiseResolution = 0.01f;
 		noiseOffset = new(Random.Range(0f, 1f), Random.Range(0f, 1f));
+		noiseScale = 2f; // Larger values create more pronounced islands and lakes
 
 		for (int column = 0; column < NumColumns; column++)
 		{

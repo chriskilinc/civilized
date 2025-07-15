@@ -11,22 +11,24 @@ public class HexMap : MonoBehaviour
     public Mesh MeshHill;
     public Mesh MeshMountain;
 
+    public GameObject ForestPrefab;
+    public GameObject JunglePrefab;
+
 
     public Material MatOcean;
     public Material MatPlains;
     public Material MatGrassland;
+    public Material MatJungle;
     public Material MatMountain;
     public Material MatDesert;
 
-    // Height above x is y
-    public float HeightMountain = 0.85f;
+    public float HeightMountain = 1f;
     public float HeightHill = 0.6f;
     public float HeightFlat = 0.0f;
-
     public float MoistureJungle = 1f;
-    public float MoistureForest = 0.6f;
-    public float MoistureGrasslands = 0.33f;
-    public float MoisturePlains = 0.0f;
+    public float MoistureForest = 0.5f;
+    public float MoistureGrasslands = 0f;
+    public float MoisturePlains = -0.75f;
 
     public readonly int NumRows = 30;
     public readonly int NumColumns = 60;
@@ -125,57 +127,64 @@ public class HexMap : MonoBehaviour
                 Hex hex = hexes[column, row];
                 GameObject hexGO = hexGameObjects[hex];
 
-                MeshRenderer meshRenderer = hexGO.GetComponentInChildren<MeshRenderer>();
-                MeshFilter meshFilter = hexGO.GetComponentInChildren<MeshFilter>();
+                MeshRenderer mr = hexGO.GetComponentInChildren<MeshRenderer>();
+                MeshFilter mf = hexGO.GetComponentInChildren<MeshFilter>();
 
-                // Elevation to set mesh
-                if (hex.Elevation >= HeightMountain)
-                {
-                    meshFilter.mesh = MeshMountain;
-                }
-                else if (hex.Elevation >= HeightHill)
-                {
-                    meshFilter.mesh = MeshHill;
-                }
-                else if (hex.Elevation >= HeightFlat)
-                {
-                    meshFilter.mesh = MeshFlat;
-                }
-                else
-                {
-                    meshFilter.mesh = MeshWater;
-                }
-
-
-                // Moisture to set texture
-                if (hex.Elevation >= HeightFlat)
+                if (hex.Elevation >= HeightFlat && hex.Elevation < HeightMountain)
                 {
                     if (hex.Moisture >= MoistureJungle)
                     {
-                        meshRenderer.material = MatGrassland;
-                        // TODO: spawn Jungle
+                        mr.material = MatJungle;
+                        // Spawn trees
+                        Vector3 p = hexGO.transform.position;
+                        if (hex.Elevation >= HeightHill)
+                        {
+                            p.y += 0.25f;
+                        }
+                        Instantiate(JunglePrefab, p, Quaternion.identity, hexGO.transform);
                     }
                     else if (hex.Moisture >= MoistureForest)
                     {
-                        meshRenderer.material = MatGrassland;
-                        // TODO: spawn forest
+                        mr.material = MatGrassland;
+                        // Spawn trees
+                        Vector3 p = hexGO.transform.position;
+                        if (hex.Elevation >= HeightHill)
+                        {
+                            p.y += 0.25f;
+                        }
+                        Instantiate(ForestPrefab, p, Quaternion.identity, hexGO.transform);
                     }
                     else if (hex.Moisture >= MoistureGrasslands)
                     {
-                        meshRenderer.material = MatGrassland;
+                        mr.material = MatGrassland;
                     }
                     else if (hex.Moisture >= MoisturePlains)
                     {
-                        meshRenderer.material = MatPlains;
+                        mr.material = MatPlains;
                     }
                     else
                     {
-                        meshRenderer.material = MatDesert;
+                        mr.material = MatDesert;
                     }
+                }
+
+                if (hex.Elevation >= HeightMountain)
+                {
+                    mr.material = MatMountain;
+                    mf.mesh = MeshMountain;
+                }
+                else if (hex.Elevation >= HeightHill)
+                {
+                    mf.mesh = MeshHill;
+                }
+                else if (hex.Elevation >= HeightFlat)
+                {
+                    mf.mesh = MeshFlat;
                 }
                 else
                 {
-                    meshRenderer.material = MatOcean;
+                    mr.material = MatOcean;
+                    mf.mesh = MeshWater;
                 }
             }
         }

@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -206,13 +207,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 50, z: 22.5}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 10, z: 22.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,6 +270,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7ba088505310740b8b47e2e9f83753, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee575fa03f107014da50666a167ebc0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 20
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,13 +374,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.1874422, y: -0.48814803, z: 0.1082198, w: 0.8454972}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: -60, z: 0}
 --- !u!114 &410087042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,7 +403,51 @@ MonoBehaviour:
   m_ShadowRenderingLayers: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
-  m_SoftShadowQuality: 1
+  m_SoftShadowQuality: 3
+--- !u!1 &674718792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 674718794}
+  - component: {fileID: 674718793}
+  m_Layer: 0
+  m_Name: MouseController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &674718793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674718792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 521380ca67bf137408ccfc17937b366e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &674718794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674718792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -474,18 +532,21 @@ MonoBehaviour:
   MeshFlat: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
   MeshHill: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
   MeshMountain: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
+  ForestPrefab: {fileID: 0}
+  JunglePrefab: {fileID: 0}
   MatOcean: {fileID: 2100000, guid: 3d85256a53fc380489d9a124fd70a30a, type: 2}
   MatPlains: {fileID: 2100000, guid: be43bc2b035557847a08ae24c7dbefb6, type: 2}
   MatGrassland: {fileID: 2100000, guid: fea8cacc1e259304caad0284ba7c5820, type: 2}
+  MatJungle: {fileID: 0}
   MatMountain: {fileID: 2100000, guid: b7eb0eee955510b4eb41da3b9271752e, type: 2}
   MatDesert: {fileID: 0}
-  HeightMountain: 0.85
+  HeightMountain: 1
   HeightHill: 0.6
   HeightFlat: 0
   MoistureJungle: 1
-  MoistureForest: 0.6
+  MoistureForest: 0.5
   MoistureGrasslands: 0
-  MoisturePlains: 0
+  MoisturePlains: -0.75
 --- !u!4 &1310043957
 Transform:
   m_ObjectHideFlags: 0
@@ -518,18 +579,21 @@ MonoBehaviour:
   MeshFlat: {fileID: 4300000, guid: e4f4e2ebd7661f74aa2a54440b0fe279, type: 3}
   MeshHill: {fileID: 4300000, guid: 91f4311fd10b4fd4aaeb00b581fd24e8, type: 3}
   MeshMountain: {fileID: 4300000, guid: 406398c8c03649e45883ffe9e4b93e02, type: 3}
+  ForestPrefab: {fileID: 4724912211532153153, guid: c6ef40d4540a70840bf857ad2d5dcf30, type: 3}
+  JunglePrefab: {fileID: 4724912211532153153, guid: c6ef40d4540a70840bf857ad2d5dcf30, type: 3}
   MatOcean: {fileID: 2100000, guid: 3d85256a53fc380489d9a124fd70a30a, type: 2}
   MatPlains: {fileID: 2100000, guid: be43bc2b035557847a08ae24c7dbefb6, type: 2}
   MatGrassland: {fileID: 2100000, guid: fea8cacc1e259304caad0284ba7c5820, type: 2}
+  MatJungle: {fileID: 2100000, guid: 6b6851bae7fac554fa593e56ee99a5d6, type: 2}
   MatMountain: {fileID: 2100000, guid: b7eb0eee955510b4eb41da3b9271752e, type: 2}
   MatDesert: {fileID: 2100000, guid: 22f504452eb50ab4bab57cf698700c58, type: 2}
-  HeightMountain: 0.85
+  HeightMountain: 1
   HeightHill: 0.6
   HeightFlat: 0
-  MoistureJungle: 1
-  MoistureForest: 0.6
+  MoistureJungle: 0.66
+  MoistureForest: 0.33
   MoistureGrasslands: 0
-  MoisturePlains: 0
+  MoisturePlains: -0.5
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -538,3 +602,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1310043957}
+  - {fileID: 674718794}
